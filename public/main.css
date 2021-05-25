@@ -1,0 +1,8 @@
+.loadOverlay {
+    height: 200%;
+    width: 200%;
+    transition: 1s;
+    background-color: rgb(31, 34, 44);
+    position: absolute;
+    z-index: 1;
+}
