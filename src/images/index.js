@@ -15,9 +15,11 @@ const IMAGES = {
     CSGOATSE: { img: require("./thumbnails/csgoatse.png").default, alt: "csgoatse" },
     ZORGO: { img: require("./thumbnails/zorgogames.png").default, alt: "zorgo" },
     GAMDOM: { img: require("./thumbnails/gamdom.png").default, alt: "Gamdom" },
-    CSGOROLL: { img: require("./thumbnails/csgoroll.png").default, alt: "csgoroll" },
+    CSGOROLL: { img: require("./thumbnails/csgoroll.png").default, alt: "Csgoroll" },
     // GAIN: { img: require("./thumbnails/Gain.png").default, alt: "Gain" },
     CSGOPRIME: { img: require("./thumbnails/csgoprime.png").default, alt: "Csgoprime" },
+    GAIN: { img: require("./thumbnails/gain.png").default, alt: "Gain.gg" },
+    ROLLBIT: { img: require("./thumbnails/rollbit.svg").default, alt: "Rollbit" },
 };
 
 export default IMAGES;

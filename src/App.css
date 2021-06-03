@@ -1,246 +1,56 @@
-body {
-    background-color: rgb(24, 26, 36);
-    overflow-x: hidden;
-    overflow-y: overlay;
-}
-
-::-webkit-scrollbar {
-    border: 0px solid rgba(20, 20, 20, 0.678);
-    background-color: rgba(20, 20, 20, 0.438);
-    border-radius: 10px;
-    width: 10px;
-}
-
-::-webkit-scrollbar:hover {
-    width: 14px;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: rgba(57, 57, 58, 0.527);
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(77, 77, 78, 0.692);
-}
-
-body {
-    background-color: rgb(31, 34, 44);
-}
-
-.background {
-    width: 100%;
-    height: 130%;
-    position: absolute;
-    background-color: rgb(31, 34, 44);
-    background-position: center;
-    background-size: cover;
-    z-index: -1;
-}
-
-.wrapper {
-    height: 100%;
-    width: 100%;
-    margin: auto;
-}
-
-.header {
-    background-color: rgb(24, 26, 36);
-    width: 100%;
-    display: flex;
-    align-items: center;
-    margin: auto;
-}
-
-.header img {
-    width: 64px;
-    display: table-cell;
-    vertical-align: middle;
-    max-width: 10%;
-    max-height: 50px;
-    padding: 10px 10px;
-}
-
-.titleBar {
-    margin: auto;
-    color: rgb(1, 215, 112);
+#heading {
+    font-size: 50px;
     text-align: center;
-    font-size: 3em;
-    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-    margin-top: 40px;
-    font-style: italic;
 }
 
-.titleBar section {
-    width: 20%;
+.cellDesc button {
+    background: rgba(34, 36, 47, 0.808);
+    border: 0px solid red;
+    color: rgb(219, 219, 219);
     margin: auto;
-    border-radius: 15px;
-    text-align: center;
-    min-width: 300px;
-    min-height: 50px;
-}
-
-.titleBar section hr {
-    margin-top: -14%;
-    border: 0px solid white;
-    height: 5px;
-    width: 40%;
-    border-radius: 30px;
-    background: linear-gradient(269deg, #333333, #121312);
-    background-size: 400% 400%;
-
-    -webkit-animation: AnimationName 6s ease infinite;
-    -moz-animation: AnimationName 6s ease infinite;
-    animation: AnimationName 6s ease infinite;
-}
-
-@-webkit-keyframes AnimationName {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-@-moz-keyframes AnimationName {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-@keyframes AnimationName {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-.contentContainer {
-    /* background-color: rgb(25, 30, 39); */
-    width: 63%;
-    margin: auto;
-    margin-top: 40px;
-    border-radius: 20px;
-}
-
-@media screen and (max-width: 480px) {
-    .titleBar section {
-        font-size: 30px;
-        width: 10px;
-    }
-
-    .contentContainer {
-        width: 100%;
-    }
-
-    .cell {
-        display: none;
-        text-align: left;
-        background-color: rgb(31, 37, 49);
-        display: inline-block;
-        margin: 10px 2px;
-        border-radius: 10px;
-        width: 48.8%;
-    }
-
-    .cell img {
-        transform: scale(0.6);
-    }
-
-    .cell p {
-        max-width: 100%;
-        margin: auto;
-        font-size: 10px;
-    }
-
-    .cellDesc {
-        background-color: rgb(42, 49, 65);
-    }
-
-    .cell hr {
-        padding: 0;
-        border: 0px solid white;
-        height: 2px;
-        background-color: rgb(142, 223, 132);
-        margin: 0;
-    }
-}
-.content {
-    padding-top: 9px;
-    margin: auto;
-    width: 93.6%;
-    padding-bottom: 4px;
-}
-
-.cell {
-    text-align: center;
-    background-color: rgb(31, 37, 49);
-    display: inline-block;
-    margin: 10px 2px;
-    border-radius: 10px;
-}
-
-.cell p {
-    width: 200px;
-    margin: auto;
-    word-wrap: break-word;
-    color: rgb(197, 204, 195);
-}
-
-.cellDesc {
-    background-color: rgb(42, 49, 65);
-    padding: 5px;
-    margin: auto;
-}
-
-.cellRef {
-    padding: 10px;
-    width: 90%;
-    margin: auto;
-}
-
-.cell:hover {
-    box-shadow: 0px 0px 6px rgb(142, 223, 132);
+    font-weight: 700;
+    border-radius: 4px;
+    display: none;
+    padding: 3px 10px;
+    cursor: pointer;
     transition: 0.2s;
 }
 
-.cell hr {
-    padding: 0;
-    border: 0px solid white;
-    height: 2px;
-    background-color: rgb(142, 223, 132);
-    margin: 0;
+.cell {
+    transition: 0.3s;
 }
 
-.cell img {
-    max-width: 100%;
-    height: auto;
-    margin: auto;
+.cell:hover .cellDesc p {
+    display: none;
 }
 
-.cell img:hover {
-    filter: hue-rotate(10deg);
+.cell button:hover {
+    padding: 5px 14px;
 }
 
-.cellImage {
-    width: 160px;
-    text-align: center;
-    height: 100px;
-    margin: auto;
+.cell:hover button {
     display: flex;
-    align-items: center;
-    justify-content: center;
+}
+
+#exit {
+    position: absolute;
+    left: 0;
+    margin-left: 20px;
+    cursor: pointer;
+    font-size: 30px;
+    width: 30px;
+    opacity: 0.7;
+    user-select: none;
+    transition: 0.3s;
+}
+
+#clicks {
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
+}
+
+#exit:hover {
+    opacity: 1;
+    transform: scale(0.8);
 }

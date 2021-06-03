@@ -2,40 +2,54 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <link rel="icon" href="./SVG/Asset 1.svg" />
+        <link rel="icon" href="./images/logo.svg" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
-        <meta name="description" content="Web site created using create-react-app" />
-        <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-        <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-        <link rel="stylesheet" href="main.css">
-        <script data-ad-client="ca-pub-6962456111902665" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <title>Free Codes</title>
+        <link rel="stylesheet" href="./css/main.css">
+        <link rel="stylesheet" href="./css/animation.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="./scripts/collapse.js"></script>
+        <!-- <script data-ad-client="ca-pub-6962456111902665" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+        <title>Bitcodes | Free Website Balance Codes</title>
     </head>
     <body>
-        <div class="loadOverlay"></div>
+        <div class="loadOverlay">                  
+            </div>
+        </div>
+        </div>
         <div class="background"></div>
         <div id="root"></div>
         <div class="wrapper">
             <div class="header">
-                <img src="./images/logo.svg" alt="" />
+                <img src="./images/logo.svg" alt="logo" />
+                <div class="socials">
+                    <img src="./images/socials/Discord-Logo-White.svg" alt="">
+                    <img src="./images/socials/Logo white.svg" alt="">
+                    <img src="./images/socials/instgram.svg" alt="">
+                </div>
             </div>
             <div class="titleBar">
                 <section>
-                    <h1>Free Codes</h1>
+                    <h1>Bitcodes</h1>
                     <hr />
                 </section>
             </div>
-            <div class="contentBreak"></div>
             <div class="contentContainer">
+            <div class="content">
+            </div>
         </div>
         <script>
-            addEventListener("DOMContentLoaded", () => {
-                document.querySelector('.loadOverlay').style.opacity = "0%"
+            preloaderFadeOutTime = 1000;
+            hidePreloader()
+                function hidePreloader() {
+                    setTimeout(() => {
+                        var preloader = $('.loadOverlay');
+                        preloader.fadeOut(preloaderFadeOutTime);
+                    }, 30)
+                }
+            addEventListener("resize", () => {
+                console.log("yoo")
             })
-            setTimeout(() => {
-                document.querySelector('.loadOverlay').style.display = "none"
-            }, 500)
+            if (!crossOriginIsolated) SharedArrayBuffer = ArrayBuffer;
         </script>
     </body>
 </html>
