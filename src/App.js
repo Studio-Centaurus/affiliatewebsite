@@ -8,7 +8,6 @@ var trendingCells = ["freeskins", "stake", "csgopolygon", "csgoroll"];
 var header;
 var content = "";
 var Clicks = 0;
-var imageSlider = "";
 
 async function componendDidMount() {
   const url = "https://bitcodesapi.herokuapp.com/sites/allsites";
