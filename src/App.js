@@ -8,6 +8,7 @@ var trendingCells = ["freeskins", "stake", "csgopolygon", "csgoroll"];
 var header;
 var content = "";
 var Clicks = 0;
+var imageSlider = "";
 
 async function componendDidMount() {
   const url = "https://bitcodesapi.herokuapp.com/sites/allsites";
@@ -162,9 +163,14 @@ export default function App() {
             <h1 id="heading">{header}</h1>
           </div>
           <div id="popoutContent">
-            <span id="content">
+            <section id="content">
               <div className="cellInfo">{content}</div>
-            </span>
+            </section>
+            <div class="sliderWrapper">
+              <div class="sliderContainer">
+                <div id="sliderImage"></div>
+              </div>
+            </div>
           </div>
         </Modal>
       </div>

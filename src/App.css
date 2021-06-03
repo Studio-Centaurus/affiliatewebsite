@@ -1,56 +1,62 @@
 #heading {
-    font-size: 50px;
-    text-align: center;
+  font-size: 50px;
+  text-align: center;
 }
 
 .cellDesc button {
-    background: rgba(34, 36, 47, 0.808);
-    border: 0px solid red;
-    color: rgb(219, 219, 219);
-    margin: auto;
-    font-weight: 700;
-    border-radius: 4px;
-    display: none;
-    padding: 3px 10px;
-    cursor: pointer;
-    transition: 0.2s;
+  background: rgba(34, 36, 47, 0.808);
+  border: 0px solid red;
+  color: rgb(219, 219, 219);
+  margin: auto;
+  font-weight: 700;
+  border-radius: 4px;
+  display: none;
+  padding: 3px 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#content {
+  width: 70%;
+  margin: auto;
+  color: rgb(1, 160, 112);
 }
 
 .cell {
-    transition: 0.3s;
+  transition: 0.3s;
 }
 
 .cell:hover .cellDesc p {
-    display: none;
+  display: none;
 }
 
 .cell button:hover {
-    padding: 5px 14px;
+  padding: 5px 14px;
 }
 
 .cell:hover button {
-    display: flex;
+  display: flex;
 }
 
 #exit {
-    position: absolute;
-    left: 0;
-    margin-left: 20px;
-    cursor: pointer;
-    font-size: 30px;
-    width: 30px;
-    opacity: 0.7;
-    user-select: none;
-    transition: 0.3s;
+  position: absolute;
+  left: 0;
+  margin-left: 20px;
+  cursor: pointer;
+  font-size: 30px;
+  width: 30px;
+  opacity: 0.7;
+  user-select: none;
+  transition: 0.3s;
 }
 
 #clicks {
-    position: absolute;
-    right: 0;
-    margin-right: 20px;
+  position: absolute;
+  right: 0;
+  margin-right: 20px;
 }
 
 #exit:hover {
-    opacity: 1;
-    transform: scale(0.8);
+  opacity: 1;
+  transform: scale(0.8);
 }
