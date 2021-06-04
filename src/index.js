@@ -3,9 +3,17 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import SimpleReactLightbox from "simple-react-lightbox";
 
 (async () => {
-    ReactDOM.render(<App />, document.querySelector(".contentContainer"));
+  ReactDOM.render(
+    <React.StrictMode>
+      <SimpleReactLightbox>
+        <App />
+      </SimpleReactLightbox>
+    </React.StrictMode>,
+    document.querySelector(".contentContainer")
+  );
 })();
 
 // If you want to start measuring performance in your app, pass a function

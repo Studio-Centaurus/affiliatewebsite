@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import React, { useState } from "react";
 import Parser from "html-react-parser";
 import styles from "./modal.css.js";
+import { SRLWrapper } from "simple-react-lightbox";
 
 var trendingCells = ["freeskins", "stake", "csgopolygon", "csgoroll"];
 var header;
@@ -118,6 +119,7 @@ export default function App() {
       gamblingState(categories.gambling);
       adwallState(categories.adwall);
       marketplaceState(categories.marketplace);
+      console.log(marketplace);
       max += 1;
     }
   })();
@@ -167,7 +169,16 @@ export default function App() {
             </section>
             <div class="sliderWrapper">
               <div class="sliderContainer">
-                <div id="sliderImage"></div>
+                <div id="sliderImage">
+                  <SRLWrapper>
+                    <a href="https://i.ibb.co/F6vrMT5/unknown.png">
+                      <img src="https://i.ibb.co/p2D78Ff/unknown.png" alt="" />
+                    </a>
+                    <a href="https://i.ibb.co/F6vrMT5/unknown.png">
+                      <img src="https://i.ibb.co/p2D78Ff/unknown.png" alt="" />
+                    </a>
+                  </SRLWrapper>
+                </div>
               </div>
             </div>
           </div>
