@@ -16,6 +16,34 @@
   transition: 0.2s;
 }
 
+.sliderWrapper {
+  margin-top: 30px;
+}
+
+.sliderContainer {
+  display: block;
+  overflow-x: scroll;
+  background-color: rgb(31, 34, 50);
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.sliderImage {
+  display: block;
+  white-space: nowrap;
+  margin: 10px;
+}
+
+.popoutImage {
+  display: inline-block;
+  margin-right: 10px;
+  user-drag: none;
+}
+
+.popoutImage img {
+  border-radius: 10px;
+}
+
 #content {
   width: 70%;
   margin: auto;

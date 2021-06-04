@@ -9,6 +9,7 @@ var trendingCells = ["freeskins", "stake", "csgopolygon", "csgoroll"];
 var header;
 var content = "";
 var Clicks = 0;
+var imageGallery = "";
 
 async function componendDidMount() {
   const url = "https://bitcodesapi.herokuapp.com/sites/allsites";
@@ -17,13 +18,30 @@ async function componendDidMount() {
   const sites = {};
   data.forEach((site) => {
     sites[site.name] = site;
+    sites[site.name].gall = [];
+    site.gallery.forEach((ctx) => {
+      sites[site.name].gall.push(
+        <div className="popoutImage" key={ctx.alt}>
+          <a href={ctx.full}>
+            <img src={ctx.thumb} alt={ctx.alt} />
+          </a>
+        </div>
+      );
+    });
+    if (sites[site.name].gall.length < 1) {
+      sites[site.name].gall.push(
+        <div className="popoutImage" key="comingsonn">
+          <a href="https://i.ibb.co/Snn1jJv/Image-Coming-Soon.png">
+            <img src="https://i.ibb.co/yyyM9Vs/Image-Coming-Soon.png" alt="comingsoon" />
+          </a>
+        </div>
+      );
+    }
   });
-  console.log(sites);
   return sites;
 }
 
 var max = 0;
-
 var sites = componendDidMount();
 
 export default function App() {
@@ -55,7 +73,6 @@ export default function App() {
   async function sendClick(event) {
     try {
       const url = `https://bitcodesapi.herokuapp.com/sites/patch/id=${sites[event.target.id]._id}`;
-      console.log(sites[event.target.id]._id);
       await fetch(url, {
         method: "PATCH",
         header: {
@@ -71,6 +88,7 @@ export default function App() {
   function toggleModal(event) {
     header = event.target.id.charAt(0).toUpperCase() + event.target.id.slice(1);
     if (event.target.id.length !== 0 && event.target.id !== "exit") {
+      imageGallery = sites[event.target.id].gall;
       content = Parser(sites[event.target.id].information);
       Clicks = sites[event.target.id].clicks;
     }
@@ -86,7 +104,6 @@ export default function App() {
       adwall: [],
       marketplace: [],
     };
-
     sites = await sites;
     Object.keys(sites).forEach((key) => {
       var contextCell = (
@@ -119,7 +136,6 @@ export default function App() {
       gamblingState(categories.gambling);
       adwallState(categories.adwall);
       marketplaceState(categories.marketplace);
-      console.log(marketplace);
       max += 1;
     }
   })();
@@ -167,17 +183,10 @@ export default function App() {
             <section id="content">
               <div className="cellInfo">{content}</div>
             </section>
-            <div class="sliderWrapper">
-              <div class="sliderContainer">
-                <div id="sliderImage">
-                  <SRLWrapper>
-                    <a href="https://i.ibb.co/F6vrMT5/unknown.png">
-                      <img src="https://i.ibb.co/p2D78Ff/unknown.png" alt="" />
-                    </a>
-                    <a href="https://i.ibb.co/F6vrMT5/unknown.png">
-                      <img src="https://i.ibb.co/p2D78Ff/unknown.png" alt="" />
-                    </a>
-                  </SRLWrapper>
+            <div className="sliderWrapper">
+              <div className="sliderContainer">
+                <div className="sliderImage">
+                  <SRLWrapper>{imageGallery}</SRLWrapper>
                 </div>
               </div>
             </div>
@@ -187,3 +196,34 @@ export default function App() {
     </div>
   );
 }
+
+// <div className="popoutImage">
+//                       <a href="https://i.ibb.co/F6vrMT5/unknown.png">
+//                         <img src="https://i.ibb.co/p2D78Ff/unknown.png" alt="" />
+//                       </a>
+//                     </div>
+//                     <div className="popoutImage">
+//                       <a href="https://i.ibb.co/F6vrMT5/unknown.png">
+//                         <img src="https://i.ibb.co/p2D78Ff/unknown.png" alt="" />
+//                       </a>
+//                     </div>
+//                     <div className="popoutImage">
+//                       <a href="https://i.ibb.co/F6vrMT5/unknown.png">
+//                         <img src="https://i.ibb.co/p2D78Ff/unknown.png" alt="" />
+//                       </a>
+//                     </div>
+//                     <div className="popoutImage">
+//                       <a href="https://i.ibb.co/F6vrMT5/unknown.png">
+//                         <img src="https://i.ibb.co/p2D78Ff/unknown.png" alt="" />
+//                       </a>
+//                     </div>
+//                     <div className="popoutImage">
+//                       <a href="https://i.ibb.co/F6vrMT5/unknown.png">
+//                         <img src="https://i.ibb.co/p2D78Ff/unknown.png" alt="" />
+//                       </a>
+//                     </div>
+//                     <div className="popoutImage">
+//                       <a href="https://i.ibb.co/F6vrMT5/unknown.png">
+//                         <img src="https://i.ibb.co/p2D78Ff/unknown.png" alt="" />
+//                       </a>
+//                     </div>
