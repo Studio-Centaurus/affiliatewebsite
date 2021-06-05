@@ -10,6 +10,14 @@ var header;
 var content = "";
 var Clicks = 0;
 var imageGallery = "";
+const lbOptions = {
+  buttons: {
+    showAutoplayButton: false,
+  },
+  caption: {
+    showCaption: false,
+  },
+};
 
 // Take and sort data from the api into an Object
 async function componendDidMount() {
@@ -188,7 +196,7 @@ export default function App() {
             <div className="sliderWrapper">
               <div className="sliderContainer">
                 <div className="sliderImage">
-                  <SRLWrapper>{imageGallery}</SRLWrapper>
+                  <SRLWrapper options={lbOptions}>{imageGallery}</SRLWrapper>
                 </div>
               </div>
             </div>

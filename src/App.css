@@ -26,10 +26,11 @@
   background-color: rgb(33, 35, 49);
   border-radius: 4px;
   position: absolute;
-  bottom: 10px;
+  bottom: 39px;
   left: 50%;
   transform: translateX(-50%);
   padding: 10px;
+  display: table;
   width: 90%;
 }
 
@@ -37,16 +38,18 @@
   display: block;
   white-space: nowrap;
   width: 40%;
+  height: 100%;
 }
 
 .popoutImage {
   display: inline-block;
-  user-drag: none;
+  height: 100%;
 }
 
 .popoutImage img {
   border-radius: 10px;
   max-width: 90%;
+  vertical-align: middle;
 }
 
 #content {
