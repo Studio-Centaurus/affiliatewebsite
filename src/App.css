@@ -37,6 +37,7 @@
   display: block;
   white-space: nowrap;
   max-width: 40%;
+  margin: auto;
 }
 
 .popoutImage {
