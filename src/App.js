@@ -11,6 +11,7 @@ var content = "";
 var Clicks = 0;
 var imageGallery = "";
 
+// Take and sort data from the api into an Object
 async function componendDidMount() {
   const url = "https://bitcodesapi.herokuapp.com/sites/allsites";
   const response = await fetch(url);
@@ -19,11 +20,12 @@ async function componendDidMount() {
   data.forEach((site) => {
     sites[site.name] = site;
     sites[site.name].gall = [];
+    // Adds an image lightbox if there's one present in the context
     site.gallery.forEach((ctx) => {
       sites[site.name].gall.push(
-        <div className="popoutImage" key={ctx.alt}>
-          <a href={ctx.full}>
-            <img src={ctx.thumb} alt={ctx.alt} />
+        <div className="popoutImage" key={ctx}>
+          <a href={ctx}>
+            <img src={ctx} alt={ctx} />
           </a>
         </div>
       );
@@ -69,7 +71,7 @@ export default function App() {
       <circle className="line" cx="25" cy="25" r="22.5" />
     </svg>
   );
-
+  // Update the click value when a site is clicked
   async function sendClick(event) {
     try {
       const url = `https://bitcodesapi.herokuapp.com/sites/patch/id=${sites[event.target.id]._id}`;
@@ -84,7 +86,7 @@ export default function App() {
       console.log(err.message);
     }
   }
-
+  // Update all the modal values when a modal is opened
   function toggleModal(event) {
     header = event.target.id.charAt(0).toUpperCase() + event.target.id.slice(1);
     if (event.target.id.length !== 0 && event.target.id !== "exit") {
@@ -196,34 +198,3 @@ export default function App() {
     </div>
   );
 }
-
-// <div className="popoutImage">
-//                       <a href="https://i.ibb.co/F6vrMT5/unknown.png">
-//                         <img src="https://i.ibb.co/p2D78Ff/unknown.png" alt="" />
-//                       </a>
-//                     </div>
-//                     <div className="popoutImage">
-//                       <a href="https://i.ibb.co/F6vrMT5/unknown.png">
-//                         <img src="https://i.ibb.co/p2D78Ff/unknown.png" alt="" />
-//                       </a>
-//                     </div>
-//                     <div className="popoutImage">
-//                       <a href="https://i.ibb.co/F6vrMT5/unknown.png">
-//                         <img src="https://i.ibb.co/p2D78Ff/unknown.png" alt="" />
-//                       </a>
-//                     </div>
-//                     <div className="popoutImage">
-//                       <a href="https://i.ibb.co/F6vrMT5/unknown.png">
-//                         <img src="https://i.ibb.co/p2D78Ff/unknown.png" alt="" />
-//                       </a>
-//                     </div>
-//                     <div className="popoutImage">
-//                       <a href="https://i.ibb.co/F6vrMT5/unknown.png">
-//                         <img src="https://i.ibb.co/p2D78Ff/unknown.png" alt="" />
-//                       </a>
-//                     </div>
-//                     <div className="popoutImage">
-//                       <a href="https://i.ibb.co/F6vrMT5/unknown.png">
-//                         <img src="https://i.ibb.co/p2D78Ff/unknown.png" alt="" />
-//                       </a>
-//                     </div>

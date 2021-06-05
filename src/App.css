@@ -23,25 +23,30 @@
 .sliderContainer {
   display: block;
   overflow-x: scroll;
-  background-color: rgb(31, 34, 50);
+  background-color: rgb(33, 35, 49);
   border-radius: 4px;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
   padding: 10px;
+  width: 90%;
 }
 
 .sliderImage {
   display: block;
   white-space: nowrap;
-  margin: 10px;
+  max-width: 40%;
 }
 
 .popoutImage {
   display: inline-block;
-  margin-right: 10px;
   user-drag: none;
 }
 
 .popoutImage img {
   border-radius: 10px;
+  max-width: 90%;
 }
 
 #content {
