@@ -36,8 +36,7 @@
 .sliderImage {
   display: block;
   white-space: nowrap;
-  max-width: 40%;
-  margin: auto;
+  width: 40%;
 }
 
 .popoutImage {
