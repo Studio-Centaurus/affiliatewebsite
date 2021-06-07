@@ -26,6 +26,13 @@ const lbOptions = {
   },
 };
 
+async function view() {
+  const url = "https://bitcodesapi.herokuapp.com/visits/patch/visit";
+  await fetch(url, {
+    METHOD: "PATCH",
+  });
+}
+
 // Take and sort data from the api into an Object
 async function componendDidMount() {
   const url = "https://bitcodesapi.herokuapp.com/sites/allsites";
@@ -92,10 +99,6 @@ export default function App() {
       const url = `https://bitcodesapi.herokuapp.com/sites/patch/id=${sites[event.target.id]._id}`;
       await fetch(url, {
         method: "PATCH",
-        header: {
-          "Content-Type": "application/json",
-        },
-        body: { clicks: 1 },
       });
     } catch (err) {
       console.log(err.message);
@@ -153,6 +156,7 @@ export default function App() {
       gamblingState(categories.gambling);
       adwallState(categories.adwall);
       marketplaceState(categories.marketplace);
+      view();
       max += 1;
     }
   })();
