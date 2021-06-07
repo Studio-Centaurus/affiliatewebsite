@@ -13,9 +13,16 @@ var imageGallery = "";
 const lbOptions = {
   buttons: {
     showAutoplayButton: false,
+    showThumbnailsButton: false,
+    showFullscreenButton: false,
+    iconColor: "rgb(1, 215, 112)",
+    backgroundColor: "rgba(0, 0, 0, 0)",
   },
   caption: {
     showCaption: false,
+  },
+  thumbnails: {
+    showThumbnails: false,
   },
 };
 
@@ -30,18 +37,18 @@ async function componendDidMount() {
     sites[site.name].gall = [];
     // Adds an image lightbox if there's one present in the context
     site.gallery.forEach((ctx) => {
+      let title = ctx.split("/");
+      title = title[title.length - 1].split(".")[0];
       sites[site.name].gall.push(
-        <div className="popoutImage" key={ctx}>
-          <a href={ctx}>
-            <img src={ctx} alt={ctx} />
-          </a>
-        </div>
+        <a href={ctx} title={title} key={title}>
+          <img src={ctx} alt={ctx} />
+        </a>
       );
     });
     if (sites[site.name].gall.length < 1) {
       sites[site.name].gall.push(
         <div className="popoutImage" key="comingsonn">
-          <a href="https://i.ibb.co/Snn1jJv/Image-Coming-Soon.png">
+          <a href="https://i.ibb.co/Snn1jJv/Image-Coming-Soon.png" title="comingsoon">
             <img src="https://i.ibb.co/yyyM9Vs/Image-Coming-Soon.png" alt="comingsoon" />
           </a>
         </div>
@@ -193,11 +200,9 @@ export default function App() {
             <section id="content">
               <div className="cellInfo">{content}</div>
             </section>
-            <div className="sliderWrapper">
-              <div className="sliderContainer">
-                <div className="sliderImage">
-                  <SRLWrapper options={lbOptions}>{imageGallery}</SRLWrapper>
-                </div>
+            <div className="scrollContainer">
+              <div className="popoutImage">
+                <SRLWrapper options={lbOptions}>{imageGallery}</SRLWrapper>
               </div>
             </div>
           </div>

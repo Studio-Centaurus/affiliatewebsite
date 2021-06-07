@@ -51,6 +51,7 @@ body {
   background-color: rgba(20, 20, 20, 0.438);
   border-radius: 10px;
   width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar:hover {
@@ -270,7 +271,7 @@ img {
 }
 
 .cell img:hover {
-  transform: scale(1.1);
+  transform: scale(1.1) rotate(8deg);
 }
 
 .cellImage {
