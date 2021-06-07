@@ -29,7 +29,7 @@ const lbOptions = {
 async function view() {
   const url = "https://bitcodesapi.herokuapp.com/visits/patch/visit";
   await fetch(url, {
-    METHOD: "PATCH",
+    method: "PATCH",
   });
 }
 
