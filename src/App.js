@@ -177,7 +177,7 @@ export default function App() {
       <div className="marketplace">
         <div>
           <h1 className="cellHeader" id="marketHeader">
-            Marketplace
+            Marketplace/Trading
           </h1>
         </div>
         <div className="markCells">{marketplace}</div>
