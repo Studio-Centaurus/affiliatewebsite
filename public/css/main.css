@@ -262,8 +262,7 @@ img {
 }
 
 .cell img:hover {
-  -webkit-filter: hue-rotate(10deg);
-  filter: brightness(120%);
+  transform: scale(1.1);
 }
 
 .cellImage {
