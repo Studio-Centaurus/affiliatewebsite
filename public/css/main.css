@@ -98,8 +98,17 @@ body {
   margin: auto;
 }
 
-.header img {
+/* .header img {
   width: 64px;
+  display: table-cell;
+  vertical-align: middle;
+  max-width: 10%;
+  max-height: 50px;
+  padding: 10px 10px;
+} */
+
+#logo {
+  width: 500px;
   display: table-cell;
   vertical-align: middle;
   max-width: 10%;
@@ -114,12 +123,13 @@ body {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  width: 200px;
+  width: 120px;
   margin: auto;
   margin-right: 0;
 }
 
 .socials img {
+  width: 24px;
   padding: 5px;
 }
 
