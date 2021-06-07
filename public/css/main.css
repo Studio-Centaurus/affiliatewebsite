@@ -108,11 +108,9 @@ body {
 } */
 
 #logo {
-  width: 500px;
   display: table-cell;
+  height: 50px;
   vertical-align: middle;
-  max-width: 10%;
-  max-height: 50px;
   padding: 10px 10px;
 }
 
