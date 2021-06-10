@@ -26,10 +26,12 @@ const lbOptions = {
   },
 };
 
-async function view() {
+function view() {
   const url = "https://bitcodesapi.herokuapp.com/visits/patch/visit";
-  await fetch(url, {
+  fetch(url, {
     method: "PATCH",
+  }).catch((err) => {
+    console.log(err);
   });
 }
 
@@ -172,7 +174,7 @@ export default function App() {
       <div className="gambling">
         <div>
           <h1 className="cellHeader" id="gamblingHeader">
-            Gambling
+            CSGO Betting
           </h1>
         </div>
         <div className="gambCells">{gambling}</div>
