@@ -5,12 +5,14 @@ import Parser from "html-react-parser";
 import styles from "./modal.css.js";
 import { SRLWrapper } from "simple-react-lightbox";
 
-var trendingCells = ["freeskins", "stake", "csgopolygon", "csgoroll"];
-var blacklistedCells = [];
 var header;
 var content = "";
 var Clicks = 0;
 var imageGallery = "";
+var blacklistedCells = [];
+var trendingCells = [];
+var awaitlimit = 0;
+
 const lbOptions = {
   buttons: {
     showAutoplayButton: false,
@@ -28,12 +30,20 @@ const lbOptions = {
 };
 
 function view() {
-  const url = "https://h56f7ezpse.execute-api.us-west-2.amazonaws.com/dev/visits/patch/visit";
+  const url = "https://h56f7ezpse.execute-api.us-west-2.amazonaws.com/dev/other/patch/type=visits";
   fetch(url, {
     method: "PATCH",
   }).catch((err) => {
     console.log("Visit request 24 hour limit reached");
   });
+}
+
+async function getSort() {
+  const url = "https://h56f7ezpse.execute-api.us-west-2.amazonaws.com/dev/other/alldata";
+  const request = await fetch(url);
+  const data = await request.json();
+  console.log("Content Loaded");
+  return data;
 }
 
 // Take and sort data from the api into an Object
@@ -69,6 +79,7 @@ async function componendDidMount() {
   return sites;
 }
 
+var sorting = getSort();
 var max = 0;
 var sites = componendDidMount();
 
@@ -120,52 +131,59 @@ export default function App() {
   }
 
   const [isOpen, setIsOpen] = React.useState(false);
-
-  (async () => {
-    var categories = {
-      trending: [],
-      gambling: [],
-      adwall: [],
-      marketplace: [],
-    };
-    sites = await sites;
-    Object.keys(sites).forEach((key) => {
-      var contextCell = (
-        <div className="cell" key={key}>
-          <div className="cellImage">
-            <a href={sites[key].href} rel="noreferrer" target="_blank">
-              <img src={sites[key].image} alt={sites[key].alt} onClick={sendClick} id={sites[key].name} />
-            </a>
-          </div>
-          <hr />
-          <div className="cellDesc">
-            <p>{sites[key].description}</p>
-            <button onClick={toggleModal} id={sites[key].name}>
-              More
-            </button>
-          </div>
-          <hr />
-          <div className="cellRef">
-            <p>{sites[key].refferal}</p>
-          </div>
-        </div>
-      );
-      if (blacklistedCells.indexOf(sites[key].name) === -1) {
-        categories[sites[key].type].push(contextCell);
-        if (trendingCells.indexOf(sites[key].name) !== -1) {
-          categories.trending.push(contextCell);
-        }
+  if (max < 1) {
+    (async () => {
+      var categories = {
+        trending: [],
+        gambling: [],
+        adwall: [],
+        marketplace: [],
+      };
+      if (awaitlimit < 1) {
+        sorting = await sorting;
+        blacklistedCells = await sorting[0].blacklist;
+        trendingCells = await sorting[0].trending;
+        sites = await sites;
       }
-    });
-    if (max < 1) {
-      trendingState(categories.trending);
-      gamblingState(categories.gambling);
-      adwallState(categories.adwall);
-      marketplaceState(categories.marketplace);
-      view();
-      max += 1;
-    }
-  })();
+      awaitlimit += 1;
+      Object.keys(sites).forEach((key) => {
+        var contextCell = (
+          <div className="cell" key={key}>
+            <div className="cellImage">
+              <a href={sites[key].href} rel="noreferrer" target="_blank">
+                <img src={sites[key].image} alt={sites[key].alt} onClick={sendClick} id={sites[key].name} />
+              </a>
+            </div>
+            <hr />
+            <div className="cellDesc">
+              <p>{sites[key].description}</p>
+              <button onClick={toggleModal} id={sites[key].name}>
+                More
+              </button>
+            </div>
+            <hr />
+            <div className="cellRef">
+              <p>{sites[key].refferal}</p>
+            </div>
+          </div>
+        );
+        if (blacklistedCells.indexOf(sites[key].name) === -1) {
+          categories[sites[key].type].push(contextCell);
+          if (trendingCells.indexOf(sites[key].name) !== -1) {
+            categories.trending.push(contextCell);
+          }
+        }
+      });
+      if (max < 1) {
+        trendingState(categories.trending);
+        gamblingState(categories.gambling);
+        adwallState(categories.adwall);
+        marketplaceState(categories.marketplace);
+        view();
+        max += 1;
+      }
+    })();
+  }
 
   return (
     <div className="content">
