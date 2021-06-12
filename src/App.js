@@ -6,6 +6,7 @@ import styles from "./modal.css.js";
 import { SRLWrapper } from "simple-react-lightbox";
 
 var trendingCells = ["freeskins", "stake", "csgopolygon", "csgoroll"];
+var blacklistedCells = [];
 var header;
 var content = "";
 var Clicks = 0;
@@ -31,7 +32,7 @@ function view() {
   fetch(url, {
     method: "PATCH",
   }).catch((err) => {
-    console.log(err);
+    console.log("Visit request 24 hour limit reached");
   });
 }
 
@@ -39,7 +40,8 @@ function view() {
 async function componendDidMount() {
   const url = "https://h56f7ezpse.execute-api.us-west-2.amazonaws.com/dev/sites/allsites";
   const response = await fetch(url);
-  const data = await response.json();
+  let data = await response.json();
+  data = data.sort((a, b) => b.clicks - a.clicks);
   const sites = {};
   data.forEach((site) => {
     sites[site.name] = site;
@@ -148,9 +150,11 @@ export default function App() {
           </div>
         </div>
       );
-      categories[sites[key].type].push(contextCell);
-      if (trendingCells.indexOf(sites[key].name) !== -1) {
-        categories.trending.push(contextCell);
+      if (blacklistedCells.indexOf(sites[key].name) === -1) {
+        categories[sites[key].type].push(contextCell);
+        if (trendingCells.indexOf(sites[key].name) !== -1) {
+          categories.trending.push(contextCell);
+        }
       }
     });
     if (max < 1) {
