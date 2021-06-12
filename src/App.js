@@ -27,7 +27,7 @@ const lbOptions = {
 };
 
 function view() {
-  const url = "https://bitcodesapi.herokuapp.com/visits/patch/visit";
+  const url = "https://h56f7ezpse.execute-api.us-west-2.amazonaws.com/dev/visits/patch/visit";
   fetch(url, {
     method: "PATCH",
   }).catch((err) => {
@@ -37,7 +37,7 @@ function view() {
 
 // Take and sort data from the api into an Object
 async function componendDidMount() {
-  const url = "https://bitcodesapi.herokuapp.com/sites/allsites";
+  const url = "https://h56f7ezpse.execute-api.us-west-2.amazonaws.com/dev/sites/allsites";
   const response = await fetch(url);
   const data = await response.json();
   const sites = {};
@@ -98,7 +98,7 @@ export default function App() {
   // Update the click value when a site is clicked
   async function sendClick(event) {
     try {
-      const url = `https://bitcodesapi.herokuapp.com/sites/patch/id=${sites[event.target.id]._id}`;
+      const url = `https://h56f7ezpse.execute-api.us-west-2.amazonaws.com/dev/sites/patch/id=${sites[event.target.id]._id}`;
       await fetch(url, {
         method: "PATCH",
       });
