@@ -12,6 +12,7 @@ var imageGallery = "";
 var blacklistedCells = [];
 var trendingCells = [];
 var awaitlimit = 0;
+const restrictedValues = ["N/A", "Click and Register"];
 
 const lbOptions = {
   buttons: {
@@ -42,7 +43,6 @@ async function getSort() {
   const url = "https://h56f7ezpse.execute-api.us-west-2.amazonaws.com/dev/other/alldata";
   const request = await fetch(url);
   const data = await request.json();
-  console.log("Content Loaded");
   return data;
 }
 
@@ -83,7 +83,11 @@ var sorting = getSort();
 var max = 0;
 var sites = componendDidMount();
 
+view();
+
 export default function App() {
+  var [opacity, opacityState] = useState("0");
+  var [copied, copyState] = useState("Copied");
   var [trending, trendingState] = useState(
     <svg viewBox="0 0 50 50" className="spinner">
       <circle className="ring" cx="25" cy="25" r="22.5" />
@@ -130,60 +134,73 @@ export default function App() {
     setIsOpen(!isOpen);
   }
 
-  const [isOpen, setIsOpen] = React.useState(false);
-  if (max < 1) {
-    (async () => {
-      var categories = {
-        trending: [],
-        gambling: [],
-        adwall: [],
-        marketplace: [],
-      };
-      if (awaitlimit < 1) {
-        sorting = await sorting;
-        blacklistedCells = await sorting[0].blacklist;
-        trendingCells = await sorting[0].trending;
-        sites = await sites;
-      }
-      awaitlimit += 1;
-      Object.keys(sites).forEach((key) => {
-        var contextCell = (
-          <div className="cell" key={key}>
-            <div className="cellImage">
-              <a href={sites[key].href} rel="noreferrer" target="_blank">
-                <img src={sites[key].image} alt={sites[key].alt} onClick={sendClick} id={sites[key].name} />
-              </a>
-            </div>
-            <hr />
-            <div className="cellDesc">
-              <p>{sites[key].description}</p>
-              <button onClick={toggleModal} id={sites[key].name}>
-                More
-              </button>
-            </div>
-            <hr />
-            <div className="cellRef">
-              <p>{sites[key].refferal}</p>
-            </div>
-          </div>
-        );
-        if (blacklistedCells.indexOf(sites[key].name) === -1) {
-          categories[sites[key].type].push(contextCell);
-          if (trendingCells.indexOf(sites[key].name) !== -1) {
-            categories.trending.push(contextCell);
-          }
-        }
-      });
-      if (max < 1) {
-        trendingState(categories.trending);
-        gamblingState(categories.gambling);
-        adwallState(categories.adwall);
-        marketplaceState(categories.marketplace);
-        view();
-        max += 1;
-      }
-    })();
+  function copy(event) {
+    let className = event.target.className;
+    navigator.clipboard.writeText(className);
+    opacityState("1");
+    copyState(`'${className}' Copied`);
+    setTimeout(() => {
+      opacityState("0");
+    }, 3000);
   }
+
+  const [isOpen, setIsOpen] = React.useState(false);
+  (async () => {
+    var categories = {
+      trending: [],
+      gambling: [],
+      adwall: [],
+      marketplace: [],
+    };
+    if (awaitlimit < 1) {
+      sorting = await sorting;
+      blacklistedCells = await sorting[0].blacklist;
+      trendingCells = await sorting[0].trending;
+      sites = await sites;
+    }
+    awaitlimit += 1;
+    Object.keys(sites).forEach((key) => {
+      var contextCell = (
+        <div className="cell" key={key}>
+          <div className="cellImage">
+            <a href={sites[key].href} rel="noreferrer" target="_blank">
+              <img src={sites[key].image} alt={sites[key].alt} onClick={sendClick} id={sites[key].name} />
+            </a>
+          </div>
+          <hr />
+          <div className="cellDesc">
+            <p>{sites[key].description}</p>
+            <button onClick={toggleModal} id={sites[key].name}>
+              More
+            </button>
+          </div>
+          <hr />
+          <div className="cellRef">
+            <p
+              onClick={restrictedValues.indexOf(sites[key].refferal) === -1 ? copy : undefined}
+              id={sites[key].name}
+              className={sites[key].refferal}
+            >
+              {sites[key].refferal}
+            </p>
+          </div>
+        </div>
+      );
+      if (blacklistedCells.indexOf(sites[key].name) === -1) {
+        categories[sites[key].type].push(contextCell);
+        if (trendingCells.indexOf(sites[key].name) !== -1) {
+          categories.trending.push(contextCell);
+        }
+      }
+    });
+    if (max < 1) {
+      trendingState(categories.trending);
+      gamblingState(categories.gambling);
+      adwallState(categories.adwall);
+      marketplaceState(categories.marketplace);
+      max += 1;
+    }
+  })();
 
   return (
     <div className="content">
@@ -235,6 +252,9 @@ export default function App() {
             </div>
           </div>
         </Modal>
+      </div>
+      <div className="copied" style={{ opacity: opacity }}>
+        <h1>{copied}</h1>
       </div>
     </div>
   );

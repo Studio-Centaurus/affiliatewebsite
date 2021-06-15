@@ -6,11 +6,9 @@ import SimpleReactLightbox from "simple-react-lightbox";
 
 (async () => {
   ReactDOM.render(
-    <React.StrictMode>
-      <SimpleReactLightbox>
-        <App />
-      </SimpleReactLightbox>
-    </React.StrictMode>,
+    <SimpleReactLightbox>
+      <App />
+    </SimpleReactLightbox>,
     document.querySelector(".contentContainer")
   );
 })();

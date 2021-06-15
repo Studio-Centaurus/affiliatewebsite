@@ -74,10 +74,11 @@ body {
 }
 
 .cell button {
-  transition: 0.36s;
+  transition: 0.2s;
 }
 
 .cell button:hover {
+  transform: scale(1.2);
   background-color: rgb(44, 56, 82);
 }
 
@@ -95,6 +96,25 @@ body {
   opacity: 0.7;
   user-select: none;
   transition: 0.3s;
+}
+
+.cellRef p {
+  cursor: pointer;
+}
+
+.copied {
+  position: fixed;
+  background-color: rgba(31, 30, 39, 0.575);
+  color: rgb(1, 215, 112);
+  right: 0;
+  bottom: 0;
+  margin: 10px;
+  padding: 10px;
+  font-size: 10px;
+  border-radius: 10px;
+  opacity: 0;
+  transition: 0.5s;
+  box-shadow: 0px 0px 7px rgb(31, 41, 34);
 }
 
 #clicks {
