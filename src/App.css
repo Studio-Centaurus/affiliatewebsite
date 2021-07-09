@@ -6,9 +6,14 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.modal {
+    background-color: orange;
+}
+
 #heading {
     font-size: 50px;
     text-align: center;
+    word-wrap: break-word;
 }
 
 .SRLImage {
@@ -98,6 +103,10 @@ body {
     transition: 0.3s;
 }
 
+.ReactModal__Overlay {
+    display: flex;
+}
+
 .cellRef p {
     cursor: pointer;
 }
@@ -130,4 +139,38 @@ body {
 
 #exit:active {
     transform: scale(0.6);
+}
+
+@media only screen and (max-height: 800px) and (max-width: 1400px) {
+    .popoutImage img {
+        height: 100px;
+        max-width: 200px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    #exit {
+        width: 28px;
+        margin-left: 8px;
+    }
+    #clicks {
+        margin-right: 10px;
+    }
+    #heading {
+        font-size: 43px;
+        margin-top: 20px;
+    }
+    .popoutImage img {
+        height: 100px;
+    }
+
+    #content {
+        width: 90%;
+        word-wrap: break-word;
+    }
+
+    .scrollContainer {
+        position: relative;
+        bottom: -30px;
+    }
 }

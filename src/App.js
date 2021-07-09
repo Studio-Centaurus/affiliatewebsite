@@ -1,6 +1,6 @@
 import "./App.css";
 import Modal from "react-modal";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Parser from "html-react-parser";
 import styles from "./modal.css.js";
 import { SRLWrapper } from "simple-react-lightbox";
@@ -12,6 +12,7 @@ var imageGallery = "";
 var blacklistedCells = [];
 var trendingCells = [];
 var awaitlimit = 0;
+
 const restrictedValues = ["N/A", "Click and Register"];
 
 const lbOptions = {
@@ -85,6 +86,7 @@ var sites = componendDidMount();
 view();
 
 export default function App() {
+    var windowSize = useWindowSize();
     var [opacity, opacityState] = useState("0");
     var [copied, copyState] = useState("Copied");
     var [trending, trendingState] = useState(
@@ -111,6 +113,16 @@ export default function App() {
             <circle className="line" cx="25" cy="25" r="22.5" />
         </svg>
     );
+    function changeModalSize(size) {
+        styles.content.width = size === 1200 ? "70%" : "50%";
+        styles.content.padding = size === 1200 ? "8px" : "20px";
+    }
+    if (windowSize.width <= 1200) {
+        changeModalSize(1200);
+    } else if (styles.content.width === "70%") {
+        changeModalSize(1500);
+    }
+
     // Update the click value when a site is clicked
     async function sendClick(event) {
         try {
@@ -188,7 +200,7 @@ export default function App() {
             if (blacklistedCells.indexOf(sites[key].name) === -1) {
                 categories[sites[key].type].push(contextCell);
                 if (trendingCells.indexOf(sites[key].name) !== -1) {
-                    categories.trending.push(contextCell);
+                    categories.trending[trendingCells.indexOf(sites[key].name)] = contextCell;
                 }
             }
         });
@@ -233,28 +245,52 @@ export default function App() {
                 </div>
                 <div className="markCells">{marketplace}</div>
             </div>
-            <div className="modal">
-                <Modal portalClassName="popout" isOpen={isOpen} onRequestClose={toggleModal} ariaHideApp={false} style={styles}>
-                    <img src="./images/exit.svg" alt="exit" onClick={toggleModal} id="exit" />
-                    <div id="clicks">Clicks: {Clicks}</div>
-                    <div id="popoutHead">
-                        <h1 id="heading">{header}</h1>
-                    </div>
-                    <div id="popoutContent">
-                        <section id="content">
-                            <div className="cellInfo">{content}</div>
-                        </section>
-                        <div className="scrollContainer">
-                            <div className="popoutImage">
-                                <SRLWrapper options={lbOptions}>{imageGallery}</SRLWrapper>
-                            </div>
+            <Modal portalClassName="popout" isOpen={isOpen} onRequestClose={toggleModal} ariaHideApp={false} style={styles}>
+                <img src="./images/exit.svg" alt="exit" onClick={toggleModal} id="exit" />
+                <div id="clicks">Clicks: {Clicks}</div>
+                <div id="popoutHead">
+                    <h1 id="heading">{header}</h1>
+                </div>
+                <div id="popoutContent">
+                    <section id="content">
+                        <div className="cellInfo">{content}</div>
+                    </section>
+                    <div className="scrollContainer">
+                        <div className="popoutImage">
+                            <SRLWrapper options={lbOptions}>{imageGallery}</SRLWrapper>
                         </div>
                     </div>
-                </Modal>
-            </div>
+                </div>
+            </Modal>
             <div className="copied" style={{ opacity: opacity }}>
                 <h1>{copied}</h1>
             </div>
         </div>
     );
+}
+
+function useWindowSize() {
+    // Initialize state with undefined width/height so server and client renders match
+    // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
+    const [windowSize, setWindowSize] = useState({
+        width: undefined,
+        height: undefined,
+    });
+    useEffect(() => {
+        // Handler to call on window resize
+        function handleResize() {
+            // Set window width/height to state
+            setWindowSize({
+                width: window.innerWidth,
+                height: window.innerHeight,
+            });
+        }
+        // Add event listener
+        window.addEventListener("resize", handleResize);
+        // Call handler right away so state gets updated with initial window size
+        handleResize();
+        // Remove event listener on cleanup
+        return () => window.removeEventListener("resize", handleResize);
+    }, []); // Empty array ensures that effect is only run on mount
+    return windowSize;
 }
