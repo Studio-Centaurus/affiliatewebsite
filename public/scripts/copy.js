@@ -1,16 +1,10 @@
 const blacklistedRefs = ["Click and Register", "N/A"];
 
-$(() => {
-    setTimeout(() => {
-        document.querySelectorAll(".cellRef").forEach((e) => {
-            e.addEventListener("click", (e) => {
-                const target = e.target;
-                if (blacklistedRefs.indexOf(target.innerHTML) === -1) {
-                    target.select();
-                    document.execCommand("copy");
-                }
-            });
-            console.log("worked");
-        });
-    }, 700);
+document.querySelector(".content").addEventListener("click", (e) => {
+    if (e.target.type === "textarea") {
+        if (!blacklistedRefs.includes(e.target.innerHTML)) {
+            e.target.select();
+            document.execCommand("copy");
+        }
+    }
 });
