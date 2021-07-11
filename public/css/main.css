@@ -212,6 +212,7 @@ body {
     -webkit-transition: transform 0.3, background-color 0.2s;
     -o-transition: transform 0.3s, background-color 0.2s;
     transition: transform 0.3s, background-color 0.2s;
+    width: 210px;
 }
 
 .cell p {
@@ -229,9 +230,10 @@ body {
 }
 
 .cellRef {
-    padding: 10px;
+    padding: 9px;
     width: 90%;
     margin: auto;
+    display: flex;
 }
 
 .cell:hover {
@@ -363,19 +365,21 @@ img {
         display: inline-block;
         margin: 10px 2px;
         border-radius: 10px;
+        /* min-width: 500px; */
         width: 170px;
     }
 
     .cell img {
         -webkit-transform: scale(0.6);
         -ms-transform: scale(0.6);
-        transform: scale(0.6);
+        transform: scale(0.8);
     }
 
-    .cell p {
+    .cell p,
+    .cell textarea {
         max-width: 100%;
         margin: auto;
-        font-size: 10px;
+        font-size: 12px;
     }
 
     .cellDesc {
@@ -388,5 +392,8 @@ img {
         height: 2px;
         background-color: rgb(142, 223, 132);
         margin: 0;
+    }
+    .cellRef {
+        padding: 4px;
     }
 }

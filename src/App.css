@@ -21,8 +21,8 @@ body {
 }
 
 .cellDesc button {
-    background: rgba(34, 36, 47, 0.808);
-    border: 0px solid red;
+    background: rgba(35, 37, 49, 0.808);
+    border: 0;
     color: rgb(219, 219, 219);
     margin: auto;
     font-weight: 700;
@@ -82,11 +82,6 @@ body {
     transition: 0.2s;
 }
 
-.cell button:hover {
-    transform: scale(1.2);
-    background-color: rgb(44, 56, 82);
-}
-
 .cell:hover button {
     display: flex;
 }
@@ -107,8 +102,26 @@ body {
     display: flex;
 }
 
-.cellRef p {
+.cellRef textarea {
     cursor: pointer;
+}
+
+.cellRef textarea {
+    background-color: rgba(0, 0, 0, 0);
+    text-align: center;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    color: rgb(219, 219, 219);
+    width: 130px;
+    border: 0;
+    max-width: 150px;
+    /* height: min-content; */
+    resize: none;
+    height: 19px;
+    margin: auto;
+}
+
+.cellRef textarea:focus {
+    outline: none;
 }
 
 .copied {
@@ -141,6 +154,16 @@ body {
     transform: scale(0.6);
 }
 
+@media only screen and (min-width: 801px) {
+    .cell button:hover {
+        transform: scale(1.2);
+        background-color: rgb(44, 56, 82);
+    }
+    .cellRef textarea {
+        font-size: 16px;
+    }
+}
+
 @media only screen and (max-height: 800px) and (max-width: 1400px) {
     .popoutImage img {
         height: 100px;
@@ -157,7 +180,7 @@ body {
         margin-right: 10px;
     }
     #heading {
-        font-size: 43px;
+        font-size: 40px;
         margin-top: 20px;
     }
     .popoutImage img {
@@ -172,5 +195,10 @@ body {
     .scrollContainer {
         position: relative;
         bottom: -30px;
+    }
+
+    .cellDesc button {
+        padding: 0;
+        font-size: 12px;
     }
 }

@@ -147,7 +147,6 @@ export default function App() {
 
     function copy(event) {
         let className = event.target.className;
-        navigator.clipboard.writeText(className);
         opacityState("1");
         copyState(`'${className}' Copied`);
         setTimeout(() => {
@@ -187,13 +186,14 @@ export default function App() {
                     </div>
                     <hr />
                     <div className="cellRef">
-                        <p
+                        <textarea
+                            type="textarea"
                             onClick={restrictedValues.indexOf(sites[key].refferal) === -1 ? copy : null}
-                            id={sites[key].name}
+                            // id={sites[key].name}
                             className={sites[key].refferal}
-                        >
-                            {sites[key].refferal}
-                        </p>
+                            value={sites[key].refferal}
+                            readOnly
+                        />
                     </div>
                 </div>
             );
